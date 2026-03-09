@@ -1,0 +1,346 @@
+{
+  "plugins": [
+    {
+      "name": "AdvancedSpyInventory",
+      "jar": "AdvancedSpyInventory-2.4.12.jar",
+      "category": "Administration",
+      "categoryUa": "Адміністрування",
+      "description": "Инструменты модератора для проверки инвентаря и действий игроков.",
+      "descriptionUa": "Інструменти модератора для перевірки інвентарю та дій гравців.",
+      "updatedAt": "2026-03-08"
+    },
+    {
+      "name": "AuctionHouse",
+      "jar": "AuctionHouse-1.0.0.jar",
+      "category": "Economy",
+      "categoryUa": "Економіка",
+      "description": "Серверный аукцион для публичной торговли предметами.",
+      "descriptionUa": "Серверний аукціон для публічної торгівлі предметами.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "AuthMe",
+      "jar": "AuthMe-5.7.0-FORK-Universal.jar",
+      "category": "Security",
+      "categoryUa": "Безпека",
+      "description": "Авторизация и защита аккаунтов на сервере.",
+      "descriptionUa": "Авторизація та захист акаунтів на сервері.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "Backuper",
+      "jar": "Backuper-4.0.3.jar",
+      "category": "Administration",
+      "categoryUa": "Адміністрування",
+      "description": "Автоматические бэкапы мира и данных сервера.",
+      "descriptionUa": "Автоматичні бекапи світу та даних сервера.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "Bosses",
+      "jar": "bosses-1.0.0.jar",
+      "category": "PvE",
+      "categoryUa": "PvE",
+      "description": "Дополнительные боевые события и боссы.",
+      "descriptionUa": "Додаткові бойові події та боси.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "BottleXP",
+      "jar": "bottle-xp-1.0.0.jar",
+      "category": "QoL",
+      "categoryUa": "Зручність",
+      "description": "Управление опытом через бутылочки опыта.",
+      "descriptionUa": "Керування досвідом через пляшечки досвіду.",
+      "updatedAt": "2026-02-28"
+    },
+    {
+      "name": "bStats",
+      "jar": "built-in",
+      "category": "Monitoring",
+      "categoryUa": "Моніторинг",
+      "description": "Сервис статистики плагинов.",
+      "descriptionUa": "Сервіс статистики плагінів.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "ChunkLoadersUltimate",
+      "jar": "chunkloadersultimate-5.7.jar",
+      "category": "Automation",
+      "categoryUa": "Автоматизація",
+      "description": "Чанклоадеры для работы ферм и механизмов оффлайн.",
+      "descriptionUa": "Чанклоадери для роботи ферм і механізмів офлайн.",
+      "updatedAt": "2026-02-26"
+    },
+    {
+      "name": "Chunky",
+      "jar": "Chunky-Bukkit-1.4.40.jar",
+      "category": "Performance",
+      "categoryUa": "Продуктивність",
+      "description": "Предгенерация чанков для стабильного TPS.",
+      "descriptionUa": "Предгенерація чанків для стабільного TPS.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "ClickVillagers",
+      "jar": "ClickVillagers-paper-1.6.2.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Дополнительные взаимодействия с жителями.",
+      "descriptionUa": "Додаткові взаємодії з мешканцями.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "CoreProtect",
+      "jar": "CoreProtect-CE-23.1.jar",
+      "category": "Security",
+      "categoryUa": "Безпека",
+      "description": "Логи и откат действий игроков в мире.",
+      "descriptionUa": "Логи та відкат дій гравців у світі.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "DailyReward",
+      "jar": "DailyReward-1.0.0.jar",
+      "category": "Progression",
+      "categoryUa": "Прогресія",
+      "description": "Ежедневные награды и бонусы за активность.",
+      "descriptionUa": "Щоденні нагороди та бонуси за активність.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "DragonBoss",
+      "jar": "DragonBoss-1.0.0.jar",
+      "category": "PvE",
+      "categoryUa": "PvE",
+      "description": "Кастомные сценарии боев с драконом.",
+      "descriptionUa": "Кастомні сценарії боїв із драконом.",
+      "updatedAt": "2026-03-01"
+    },
+    {
+      "name": "EasyMode",
+      "jar": "easy-mode-1.0-SNAPSHOT.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Регулировка сложности и условий старта.",
+      "descriptionUa": "Регулювання складності та умов старту.",
+      "updatedAt": "2026-02-28"
+    },
+    {
+      "name": "EndLock",
+      "jar": "lock-end-1.0.0.jar",
+      "category": "Progression",
+      "categoryUa": "Прогресія",
+      "description": "Условия открытия доступа в Энд.",
+      "descriptionUa": "Умови відкриття доступу в Енд.",
+      "updatedAt": "2026-03-04"
+    },
+    {
+      "name": "GrimAC",
+      "jar": "grimac-bukkit-2.3.73-0a6ac7a.jar",
+      "category": "Security",
+      "categoryUa": "Безпека",
+      "description": "Современный античит для честной игры.",
+      "descriptionUa": "Сучасний античит для чесної гри.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "GuardGovernance",
+      "jar": "guard-governance-1.0.0-SNAPSHOT.jar",
+      "category": "Administration",
+      "categoryUa": "Адміністрування",
+      "description": "Система правил и управленческих ограничений.",
+      "descriptionUa": "Система правил і керівних обмежень.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "InstantRestock",
+      "jar": "instantrestock_2.6.1.jar",
+      "category": "Economy",
+      "categoryUa": "Економіка",
+      "description": "Автопополнение торговых предложений.",
+      "descriptionUa": "Автопоповнення торгових пропозицій.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "LagFixer",
+      "jar": "LagFixer.jar",
+      "category": "Performance",
+      "categoryUa": "Продуктивність",
+      "description": "Снижение лагов и стабилизация сервера.",
+      "descriptionUa": "Зниження лагів і стабілізація сервера.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "MythicMobs",
+      "jar": "MythicMobs-5.11.0.jar",
+      "category": "PvE",
+      "categoryUa": "PvE",
+      "description": "Кастомные мобы, навыки и ивенты.",
+      "descriptionUa": "Кастомні моби, навички та івенти.",
+      "updatedAt": "2026-03-08"
+    },
+    {
+      "name": "PlasmoVoice",
+      "jar": "PlasmoVoice-Paper-2.1.8.jar",
+      "category": "Communication",
+      "categoryUa": "Комунікація",
+      "description": "Голосовой чат на сервере с пространственным звуком.",
+      "descriptionUa": "Голосовий чат на сервері з просторовим звуком.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "PluginMetrics",
+      "jar": "built-in",
+      "category": "Monitoring",
+      "categoryUa": "Моніторинг",
+      "description": "Сбор телеметрии для анализа состояния сервера.",
+      "descriptionUa": "Збір телеметрії для аналізу стану сервера.",
+      "updatedAt": "2026-03-03"
+    },
+    {
+      "name": "SkinsRestorer",
+      "jar": "SkinsRestorer.jar",
+      "category": "Customization",
+      "categoryUa": "Кастомізація",
+      "description": "Поддержка скинов для игроков.",
+      "descriptionUa": "Підтримка скінів для гравців.",
+      "updatedAt": "2026-03-06"
+    },
+    {
+      "name": "spark",
+      "jar": "spark.jar",
+      "category": "Monitoring",
+      "categoryUa": "Моніторинг",
+      "description": "Профилирование нагрузки и диагностика производительности.",
+      "descriptionUa": "Профілювання навантаження та діагностика продуктивності.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "TeleportBook",
+      "jar": "teleport-book-1.1.3.jar",
+      "category": "QoL",
+      "categoryUa": "Зручність",
+      "description": "Книга телепортов для быстрых перемещений.",
+      "descriptionUa": "Книга телепортів для швидких переміщень.",
+      "updatedAt": "2026-03-02"
+    },
+    {
+      "name": "TradePost",
+      "jar": "TradePost-1.0.0.jar",
+      "category": "Economy",
+      "categoryUa": "Економіка",
+      "description": "Система торговли и витрин между игроками.",
+      "descriptionUa": "Система торгівлі та вітрин між гравцями.",
+      "updatedAt": "2026-03-09"
+    },
+    {
+      "name": "update",
+      "jar": "update.jar",
+      "category": "Utility",
+      "categoryUa": "Утиліти",
+      "description": "Технический модуль обновления внутренних компонентов.",
+      "descriptionUa": "Технічний модуль оновлення внутрішніх компонентів.",
+      "updatedAt": "2026-03-06"
+    },
+    {
+      "name": "Veinminer",
+      "jar": "veinminer-paper-2.5.3.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Быстрая добыча руд и деревьев по жиле.",
+      "descriptionUa": "Швидкий видобуток руд і дерев по жилі.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "WildMountsHorse",
+      "jar": "wild-mounts-horse-1.0.0.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Расширенные механики лошадей и маунтов.",
+      "descriptionUa": "Розширені механіки коней і маунтів.",
+      "updatedAt": "2026-03-01"
+    },
+    {
+      "name": "WorldBoss",
+      "jar": "WorldBoss-1.0.0.jar",
+      "category": "PvE",
+      "categoryUa": "PvE",
+      "description": "Мировые боссы и групповые сражения.",
+      "descriptionUa": "Світові боси та групові битви.",
+      "updatedAt": "2026-03-08"
+    },
+    {
+      "name": "copperhopper",
+      "jar": "copperhopper-0.19.0+1.21.10.jar",
+      "category": "Automation",
+      "categoryUa": "Автоматизація",
+      "description": "Улучшенные воронки и логистика предметов.",
+      "descriptionUa": "Покращені лійки та логістика предметів.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "disableelytra",
+      "jar": "disableelytra-1.0.jar",
+      "category": "Rules",
+      "categoryUa": "Правила",
+      "description": "Отключение элитр в рамках баланса сервера.",
+      "descriptionUa": "Вимкнення елітр у межах балансу сервера.",
+      "updatedAt": "2026-02-28"
+    },
+    {
+      "name": "healthborder",
+      "jar": "healthborder-1.0.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Ограничение здоровья в зависимости от прогресса/зоны.",
+      "descriptionUa": "Обмеження здоров'я залежно від прогресу/зони.",
+      "updatedAt": "2026-02-24"
+    },
+    {
+      "name": "roadspeed",
+      "jar": "roadspeed-1.0.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Ускорение передвижения по дорогам.",
+      "descriptionUa": "Прискорення пересування дорогами.",
+      "updatedAt": "2026-02-28"
+    },
+    {
+      "name": "tps-hud",
+      "jar": "tps-hud-1.9.0+1.21.9.jar",
+      "category": "Monitoring",
+      "categoryUa": "Моніторинг",
+      "description": "Показатели TPS и производительности прямо в HUD.",
+      "descriptionUa": "Показники TPS і продуктивності прямо в HUD.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "unlock-all-recipes",
+      "jar": "unlock-all-recipes-88.0.jar",
+      "category": "QoL",
+      "categoryUa": "Зручність",
+      "description": "Открывает все рецепты для комфортного старта.",
+      "descriptionUa": "Відкриває всі рецепти для комфортного старту.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "villagerpickup",
+      "jar": "villagerpickup-fabric-1.21.10-1.2.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Перенос жителей с помощью предмета.",
+      "descriptionUa": "Перенесення мешканців за допомогою предмета.",
+      "updatedAt": "2026-02-22"
+    },
+    {
+      "name": "veinminer-enchant",
+      "jar": "veinminer-enchant-2.3.0.jar",
+      "category": "Gameplay",
+      "categoryUa": "Геймплей",
+      "description": "Зачарование для vein mining механики.",
+      "descriptionUa": "Зачарування для механіки vein mining.",
+      "updatedAt": "2026-02-22"
+    }
+  ]
+}

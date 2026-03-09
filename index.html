@@ -1,696 +1,216 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RusLand V -- Эпоха Истинного Выживания</title>
+  <title>RusLand Server — Главная</title>
+  <meta name="description" content="Промо-сайт сервера RusLand: заявка в whitelist, актуальные фишки, моды, обновления и быстрый вход в игру.">
+  <meta name="theme-color" content="#171d1a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RusLand Server">
+  <meta property="og:description" content="Java 1.21.10. Подай заявку в whitelist и начни играть на RusLand.">
+  <meta property="og:image" content="assets/og-cover.svg">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="RusLand Server">
+  <meta property="twitter:description" content="Java 1.21.10. Заявка в whitelist, моды, апдейты, челленджи.">
+  <meta property="twitter:image" content="assets/og-cover.svg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    
-    html { scroll-behavior: smooth; }
-
-    /* Кованый скроллбар */
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #0f0d0c; }
-    ::-webkit-scrollbar-thumb { 
-      background: linear-gradient(to bottom, #3a2c22, #c9a871, #3a2c22); 
-      border-radius: 5px; 
-      border: 1px solid #1a1512;
-    }
-
-    body {
-      background-color: #0c0a09;
-      background-image: 
-        radial-gradient(circle at top center, rgba(36, 26, 20, 0.8) 0%, #0c0a09 100%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-      color: #d4c4b7;
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-      font-size: 18px;
-    }
-
-    h1, h2, h3, .logo, .nav-links a, .cta, .ip-box {
-      font-family: 'Cinzel', serif;
-    }
-
-    .navbar {
-      position:fixed;
-      width:100%;
-      background: rgba(12, 10, 9, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201, 168, 113, 0.2);
-      padding: 15px 0;
-      z-index: 100;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      transition: all 0.4s ease;
-    }
-
-    .nav-container {
-      max-width:1200px;
-      margin:auto;
-      display:flex;
-      justify-content:space-between;
-      align-items: center;
-      padding:0 20px;
-    }
-
-    .logo {
-      font-weight: 900;
-      font-size: 28px;
-      color: #c9a871;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 0 15px rgba(201, 168, 113, 0.5), 0 0 30px rgba(201, 168, 113, 0.2);
-    }
-
-    .nav-links a {
-      margin-left: 35px;
-      cursor:pointer;
-      color: #a89f91;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      position: relative;
-      transition: 0.3s;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 50%;
-      background: #c9a871;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-      box-shadow: 0 0 10px #c9a871;
-    }
-
-    .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
-
-    #particles {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      mix-blend-mode: screen;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: fadeInUP 1.5s ease-out forwards;
-    }
-
-    @keyframes fadeInUP {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero h1 {
-      font-size: clamp(45px, 8vw, 110px);
-      font-weight: 900;
-      background: linear-gradient(to bottom, #fff, #c9a871, #8b5a2b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      filter: drop-shadow(0 0 20px rgba(201, 168, 113, 0.4));
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      font-size: 24px;
-      color: #a89f91;
-      letter-spacing: 5px;
-      font-style: italic;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .ip-box {
-      margin: 40px auto;
-      padding: 25px 50px;
-      background: rgba(20, 15, 12, 0.7);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(201, 168, 113, 0.4);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      font-size: 28px;
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 2px;
-      box-shadow: 0 0 30px rgba(0,0,0,1), inset 0 0 20px rgba(201, 168, 113, 0.05);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ip-box::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(201, 168, 113, 0.1) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      transform: scale(0.5);
-    }
-
-    .ip-box:hover {
-      border-color: #c9a871;
-      box-shadow: 0 0 40px rgba(201, 168, 113, 0.2), inset 0 0 30px rgba(201, 168, 113, 0.15);
-      transform: scale(1.02);
-      text-shadow: 0 0 10px #c9a871;
-    }
-    
-    .ip-box:hover::before { opacity: 1; transform: scale(1); }
-
-    .ip-box span {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      color: #a89f91;
-      margin-top: 10px;
-      font-style: italic;
-      letter-spacing: 1px;
-      text-transform: none;
-    }
-
-    .cta {
-      padding: 18px 45px;
-      border: 1px solid #c9a871;
-      background: linear-gradient(135deg, #2a1f18 0%, #15100c 100%);
-      color: #c9a871;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      text-decoration: none;
-      display: inline-block;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .cta::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; width: 100%; height: 100%;
-      background: #c9a871;
-      z-index: -1;
-      transform: scaleY(0);
-      transform-origin: bottom center;
-      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .cta:hover { color: #0c0a09; text-shadow: none; border-color: transparent; }
-    .cta:hover::after { transform: scaleY(1); }
-
-    .cta.tg-btn { border-color: #4a6fa5; color: #b0c4de; margin-top: 40px; }
-    .cta.tg-btn::after { background: #4a6fa5; }
-    .cta.tg-btn:hover { color: #fff; }
-
-    .section {
-      padding: 140px 20px;
-      max-width: 1200px;
-      margin: auto;
-      position: relative;
-    }
-
-    .section h2 {
-      font-size: 48px;
-      color: #c9a871;
-      text-align: center;
-      margin-bottom: 50px;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      text-shadow: 0 0 15px rgba(201, 168, 113, 0.3);
-      position: relative;
-    }
-
-    .section h2::after {
-      content: '✦';
-      display: block;
-      font-size: 20px;
-      color: #5a4634;
-      margin-top: 15px;
-    }
-
-    .dark { 
-      background: linear-gradient(to bottom, #0c0a09, #16120e, #0c0a09);
-      border-top: 1px solid rgba(201, 168, 113, 0.1); 
-      border-bottom: 1px solid rgba(201, 168, 113, 0.1);
-      box-shadow: inset 0 20px 50px rgba(0,0,0,0.8), inset 0 -20px 50px rgba(0,0,0,0.8);
-    }
-
-    .big-text {
-      font-size: 24px;
-      line-height: 1.7;
-      text-align: center;
-      margin: 0 auto;
-      max-width: 850px;
-      color: #bfaea0;
-    }
-
-    .riot-intro {
-      background: linear-gradient(to right, rgba(139, 0, 0, 0.1), transparent);
-      border-left: 4px solid #8b0000;
-      padding: 30px;
-      margin-bottom: 60px;
-      font-style: italic;
-      color: #d4c4b7;
-      box-shadow: inset 20px 0 50px rgba(0,0,0,0.5);
-      position: relative;
-    }
-
-    .riot-intro strong {
-      color: #c9a871;
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-style: normal;
-      text-shadow: 0 0 10px rgba(201, 168, 113, 0.5);
-    }
-
-    /* 3D Карточки Указов */
-    .patch-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 35px;
-      perspective: 1000px; /* Для 3D эффекта */
-    }
-
-    .patch-card {
-      padding: 40px 30px;
-      background: rgba(20, 15, 12, 0.6);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(201, 168, 113, 0.15);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-    
-    /* Декоративные углы карточек */
-    .patch-card::before, .patch-card::after {
-      content: '';
-      position: absolute;
-      width: 15px; height: 15px;
-      border: 2px solid #c9a871;
-      opacity: 0.3;
-      transition: all 0.4s ease;
-    }
-    .patch-card::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-    .patch-card::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-
-    .patch-card h3 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #e8dcc4;
-      text-align: center;
-      transform: translateZ(30px); /* 3D pop-out эффект */
-      text-shadow: 0 5px 10px rgba(0,0,0,0.8);
-    }
-
-    .patch-card p {
-      text-align: center;
-      line-height: 1.6;
-      color: #a89f91;
-      transform: translateZ(20px); /* 3D pop-out эффект */
-    }
-
-    .patch-card:hover {
-      background: rgba(26, 20, 16, 0.8);
-      border-color: rgba(201, 168, 113, 0.6);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 30px rgba(201, 168, 113, 0.1);
-    }
-    
-    .patch-card:hover::before, .patch-card:hover::after {
-      opacity: 1;
-      width: 30px; height: 30px;
-      box-shadow: 0 0 10px rgba(201, 168, 113, 0.5);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-    }
-
-    .gallery-item {
-      width: 100%;
-      height: 280px;
-      background-color: #000;
-      border: 1px solid rgba(201, 168, 113, 0.2);
-      overflow: hidden;
-      position: relative;
-      cursor: crosshair;
-    }
-
-    .gallery-item::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: inset 0 0 50px rgba(0,0,0,0.9);
-      pointer-events: none;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1), filter 0.8s ease;
-      filter: sepia(40%) contrast(1.2) brightness(0.6);
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.15);
-      filter: sepia(0%) contrast(1.1) brightness(1.1);
-    }
-
-    .gallery-item:hover { border-color: #c9a871; box-shadow: 0 0 20px rgba(201, 168, 113, 0.2); }
-
-    .ip-highlight {
-      margin-top: 40px;
-      padding: 20px 40px;
-      background: linear-gradient(90deg, transparent, rgba(201, 168, 113, 0.1), transparent);
-      border-top: 1px solid #c9a871;
-      border-bottom: 1px solid #c9a871;
-      font-size: 28px;
-      color: #fff;
-      display: inline-block;
-      text-shadow: 0 0 15px rgba(201, 168, 113, 0.8);
-      letter-spacing: 2px;
-    }
-
-    .center { display: flex; flex-direction: column; align-items: center; }
-
-    footer {
-      text-align: center;
-      padding: 50px;
-      font-family: 'Cinzel', serif;
-      color: #5a4634;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 14px;
-      background: #080605;
-      border-top: 1px solid #1a1512;
-      position: relative;
-    }
-
-    .notification {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%) translateY(30px);
-      background: linear-gradient(to bottom, #2a1f18, #15100c);
-      border: 1px solid #c9a871;
-      color: #e8dcc4;
-      padding: 18px 40px;
-      font-family: 'Cinzel', serif;
-      font-size: 16px;
-      letter-spacing: 1px;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 1000;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(201, 168, 113, 0.2);
-    }
-
-    .notification.show { 
-      opacity: 1; 
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    @media(max-width: 768px) {
-      .section { padding: 80px 20px; }
-      .nav-links { display: none; }
-      .hero h1 { font-size: 38px; }
-      .ip-box { font-size: 18px; padding: 20px; }
-    }
-	::selection {
-  background: rgba(139, 0, 0, 0.8); /* Темно-красный */
-  color: #c9a871; /* Золотой */
-  text-shadow: 0 0 5px rgba(201, 168, 113, 0.5);
-}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="data/content.js" defer></script>
+  <script src="data/telegram-config.js" defer></script>
+  <script src="assets/react-spotlight.js" defer></script>
+  <script src="assets/app.js" defer></script>
 </head>
-<body>
+<body data-page="index">
+  <header class="site-header">
+    <div class="container topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">RusLand</span>
+      </a>
 
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">RusLand V</div>
-    <div class="nav-links">
-      <a href="#about">Наставление</a>
-      <a href="#patchnotes">Правда Русланова</a>
-      <a href="#media">Библиотека</a>
-      <a href="#whitelist">Врата</a>
-    </div>
-  </div>
-</nav>
+      <button class="menu-toggle" id="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-i18n="common.menu">Меню</button>
 
-<header class="hero">
-  <canvas id="particles"></canvas>
-  <div class="hero-content">
-    <h1>Королевство RusLand</h1>
-    <p class="subtitle">Эпоха Восхождения Новых Героев</p>
+      <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
+        <a href="index.html" aria-current="page" data-i18n="nav.home">Главная</a>
+        <a href="start.html" data-i18n="nav.start">Начать играть</a>
+        <a href="mods.html" data-i18n="nav.mods">Моды</a>
+        <a href="updates.html" data-i18n="nav.updates">Обновления</a>
+        <a href="challenges.html" data-i18n="nav.challenges">Челленджи</a>
+        <a href="rules.html" data-i18n="nav.rules">Правила/FAQ</a>
+        <a href="plugins.html" data-i18n="nav.plugins">Плагины</a>
+      </nav>
 
-    <div class="ip-box" onclick="copyIP()">
-      rusland5.sosal.today
-      <span>Оставьте след в истории</span>
-    </div>
-
-    <a href="#patchnotes" class="cta">Внемлить Правду Русланову</a>
-  </div>
-</header>
-
-<section class="section reveal" id="about">
-  <div class="container">
-    <h2>Наставление путникам</h2>
-    <p class="big-text">
-      Королевство RusLand — место для всех. Здесь ценится честный труд, помощь ближнему и соблюдение Правды. Вы сможете возвеличиться как умелый торговец или инженер, солдат или мирный фермер. А можете и сгинуть в безвестности.
-    </p>
-  </div>
-</section>
-
-<section class="section dark reveal" id="patchnotes">
-  <div class="container">
-    <h2>Правда Русланова 5 Эпохи</h2>
-
-    <div class="riot-intro">
-      <p>Скреплено печатью: <strong>Его Княжие Величие Руслан Праведный</strong></p>
-      <br>
-      <p>1. Издревле не дано летать ни одному людину. Использование колдовских крыльев строжайше запрещено на наших землях. Отныне истинная сила кроется в ваших скакунов, ногах и каменных трактах, связывающих грады да поселения людин.</p>
-	  <br><p>2. Иные формы любых деяний дозволены до поры нарушения чести и морали. Свободные людины творят всё что угодно ближним своим. </p>
-	  <br><p>3. Коли обижен будет кто из свободных мужей али дев, обиженный может сам вершить свой суд али челом бить посаднику Его Княжиего Величия Руслана Праведного, Вячеславу Фрозовскому.</p>
-	  <br><p>4. Коли обиженный челом бил посаднику, али сам посадник делом обиженного решил заняться став свидетелем, сам посадник и решает судьбу обиженного и лихого, что сотворил обиду.</p>
-	 
-    </div>
-
-    <div class="patch-grid">
-      <div class="patch-card tilt-card">
-        <h3>🐎 Тренированные Скакуны</h3>
-        <p>Люди летать не вольы. Конь - ваш верный друг на просторах RusLand. Доводите лошадей до совершенства скача на них каждый день.</p>
-      </div>
-
-      <div class="patch-card tilt-card">
-        <h3>🛣 Свободные Тракты</h3>
-        <p>Указом Его Княжиего Величия каждому свободному дозволено строить тракты. Тракты сии дадут прудкость вашим коням и вашим ногам.</p>
-      </div>
-      
-      <div class="patch-card tilt-card">
-        <h3>⚖️ Аукцион Его Княжиего Величия </h3>
-        <p>Указом его Княжиего Величия все рынки были упразднены и заменены Аукционом. Каждый свободный людин может торговать чем ему угодно. Основной величиной будет ныне алмазы земные.</p>
-		</div>
-
-      <div class="patch-card tilt-card">
-        <h3>❤️ Истощение духа</h3>
-        <p>На мир было наложено неизвстное проклятие. Максимальный запас духа живого всего теперь зависит от вашего расстояния от центра мира.</p>
-      </div>
-
-      <div class="patch-card tilt-card">
-        <h3>📦 Пленение душ (NPC)</h3>
-        <p>Темная магия [Ctrl + ПКМ] позволяет обращать крестьян в предметы. Указом Его Княжиего Величия дозволена торговля сиими несвободными, али пользование для любых своих дел.</p>
-      </div>
-	  
-	  <div class="patch-card tilt-card">
-        <h3>🧭 Бессонные земли</h3>
-        <p>Определённые регионы больше не засыпают. Производственные цепочки, фермы и механизмы продолжают работу независимо от присутствия людин свободных. /clu</p>
+      <div class="actions">
+        <div class="lang-switch" aria-label="Language">
+          <button type="button" data-lang-switch="ru">RU</button>
+          <button type="button" data-lang-switch="ua">UA</button>
+        </div>
+        <a class="pill-btn primary" href="index.html#apply-section" data-i18n="common.apply">Подать заявку</a>
+        <a class="pill-btn" data-discord-link target="_blank" rel="noopener noreferrer" data-i18n="common.discord">В Discord</a>
+        <button class="pill-btn" type="button" data-copy-ip data-i18n="common.copyIp">Скопировать IP</button>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<section class="section reveal" id="media">
-  <div class="container">
-    <h2>Королевская Библиотека</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="https://picsum.photos/seed/castle1/800/600" alt="Малый дом">
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="panel reveal">
+          <h1 class="crest" data-i18n="index.title">RusLand — спокойный старт и живое выживание</h1>
+          <p class="subtitle" data-i18n="index.subtitle">Зайди на RusLand и начни свой путь: строй, торгуй, исследуй и играй в команде.</p>
+
+          <div class="stat-row">
+            <div class="stat"><strong data-i18n="common.serverIpLabel">IP сервера</strong>: <span data-server-ip>rusland5.20tps.ru</span></div>
+            <div class="stat"><strong data-i18n="common.versionLabel">Версия</strong>: <span data-server-version>1.21.10</span></div>
+            <div class="stat"><strong data-i18n="common.platformLabel">Платформа</strong>: <span data-server-platform>Java</span></div>
+          </div>
+
+          <div class="cta-row">
+            <a class="pill-btn primary" href="#apply-section" data-i18n="common.apply">Подать заявку</a>
+            <a class="pill-btn" data-discord-link target="_blank" rel="noopener noreferrer" data-i18n="common.discord">В Discord</a>
+            <a class="pill-btn" href="start.html" data-i18n="common.ctaStart">Быстрый старт</a>
+          </div>
+        </article>
+
+        <aside class="panel reveal">
+          <h2 class="section-title" data-i18n="index.statusCardTitle">Статус мира</h2>
+          <p class="section-subtitle" data-i18n="index.statusCardText">Проверь онлайн и заходи. Если сервер сейчас пустой, всё равно подавай заявку.</p>
+          <div class="stat"><strong data-i18n="common.playersLabel">Игроки</strong>: <span id="server-status">...</span></div>
+
+          <div class="stack" style="margin-top: 14px;">
+            <a class="pill-btn" href="mods.html" data-i18n="common.ctaMods">Полезные моды</a>
+            <a class="pill-btn" href="updates.html" data-i18n="common.ctaUpdates">Что нового</a>
+            <a class="pill-btn" href="challenges.html" data-i18n="nav.challenges">Челленджи</a>
+          </div>
+        </aside>
       </div>
-      <div class="gallery-item">
-        <img src="https://picsum.photos/seed/village2/800/600" alt="Крепость">
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="index.pathTitle">Как начать без лишних шагов</h2>
+        <p class="section-subtitle" data-i18n="index.pathSub">Подключись, оставь анкету и сразу переходи в игру.</p>
+        <div class="card-grid">
+          <article class="card reveal"><h3 data-i18n="index.s1t">1. Скопируй IP</h3><p data-i18n="index.s1d">Зайди на сервер с Java 1.21.10 и осмотрись без спешки.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.s2t">2. Заполни короткую анкету</h3><p data-i18n="index.s2d">4 поля, черновик сохраняется автоматически в браузере.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.s3t">3. Отправь в Telegram</h3><p data-i18n="index.s3d">Мы откроем Telegram с готовым текстом, останется нажать отправить.</p></article>
+        </div>
       </div>
-      <div class="gallery-item">
-        <img src="https://picsum.photos/seed/market3/800/600" alt="Хижина колдуна">
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="react-spotlight" class="panel reveal"></div>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="index.featuresTitle">Оставайтесь с нами: здесь всегда есть чем заняться</h2>
+        <p class="section-subtitle" data-i18n="index.featuresSub">Собрали механики, которые реально чувствуются в ежедневной игре.</p>
+
+        <div class="feature-grid">
+          <article class="card reveal"><h3 data-i18n="index.f1t">Живой аукцион</h3><p data-i18n="index.f1d">AuctionHouse и TradePost дают понятную экономику и быстрый оборот вещей.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.f2t">Прогресс с боссами</h3><p data-i18n="index.f2d">DragonBoss, WorldBoss и MythicMobs создают контент для групп и соло игроков.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.f3t">Голос рядом</h3><p data-i18n="index.f3d">PlasmoVoice делает кооп, вылазки и переговоры действительно живыми.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.f4t">Честная игра</h3><p data-i18n="index.f4d">GrimAC + CoreProtect: защита от читов и восстановление после конфликтов.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.f5t">Удобный старт</h3><p data-i18n="index.f5d">AuthMe, DailyReward и разблокировка рецептов помогают войти в игру без боли.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.f6t">Производительность</h3><p data-i18n="index.f6d">Chunky, LagFixer и spark держат стабильность в пиковые часы.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="index.galleryTitle">Галерея сервера</h2>
+        <p class="section-subtitle" data-i18n="index.gallerySub">Реальные кадры с сервера: база, поселения и атмосферные локации.</p>
+        <div class="gallery">
+          <figure class="reveal shot-1" data-lightbox-src="data/image5.png" data-lightbox-alt="Вид на поселение в цветущем биоме">
+            <img src="data/image5.png" alt="Вид на поселение в цветущем биоме" loading="lazy">
+            <figcaption data-i18n="index.g1">Вид на поселение</figcaption>
+          </figure>
+          <figure class="reveal shot-2" data-lightbox-src="data/image2.png" data-lightbox-alt="Дом игрока и стартовая зона">
+            <img src="data/image2.png" alt="Дом игрока и стартовая зона" loading="lazy">
+            <figcaption data-i18n="index.g2">Уютная стартовая база</figcaption>
+          </figure>
+          <figure class="reveal shot-3" data-lightbox-src="data/image3.png" data-lightbox-alt="Беседка и прогулочная зона">
+            <img src="data/image3.png" alt="Беседка и прогулочная зона" loading="lazy">
+            <figcaption data-i18n="index.g3">Общая зона отдыха</figcaption>
+          </figure>
+          <figure class="reveal shot-4" data-lightbox-src="data/image4.png" data-lightbox-alt="Интерьер декоративной базы">
+            <img src="data/image4.png" alt="Интерьер декоративной базы" loading="lazy">
+            <figcaption data-i18n="index.g4">Детализированные интерьеры</figcaption>
+          </figure>
+          <figure class="reveal shot-5" data-lightbox-src="data/screen1.jpg" data-lightbox-alt="Пейзаж в цветущем биоме">
+            <img src="data/screen1.jpg" alt="Пейзаж в цветущем биоме" loading="lazy">
+            <figcaption data-i18n="index.g5">Атмосферные пейзажи</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="apply-section">
+      <div class="container">
+        <article class="panel reveal">
+          <h2 class="section-title" data-i18n="index.applyTitle">Короткая заявка в whitelist</h2>
+          <p class="section-subtitle" data-i18n="index.applySub">Заполни 4 поля. Нажми «Отправить в Telegram» — текст заявки скопируется, и откроется бот.</p>
+
+          <form id="apply-form" novalidate>
+            <div class="form-grid">
+              <label>
+                <span data-i18n="apply.labelNick">Ник в Minecraft</span>
+                <input id="apply-nick" type="text" minlength="2" maxlength="32" required data-i18n-placeholder="apply.placeholderNick" placeholder="Например: RedStoneFox">
+              </label>
+
+              <label>
+                <span data-i18n="apply.labelAge">Возраст</span>
+                <input id="apply-age" type="number" min="14" max="99" required data-i18n-placeholder="apply.placeholderAge" placeholder="От 10 до 99">
+              </label>
+
+              <label class="field-full">
+                <span data-i18n="apply.labelRole">Опыт / роль</span>
+                <input id="apply-role" type="text" minlength="2" maxlength="64" required data-i18n-placeholder="apply.placeholderRole" placeholder="Строитель, фермер, рейдер, торговец...">
+              </label>
+
+              <label class="field-full">
+                <span data-i18n="apply.labelWhy">Почему хочешь к нам</span>
+                <textarea id="apply-why" minlength="10" maxlength="500" required data-i18n-placeholder="apply.placeholderWhy" placeholder="Коротко о себе и как планируешь играть на сервере"></textarea>
+              </label>
+            </div>
+
+            <div class="cta-row" style="margin-top: 14px;">
+              <button id="send-telegram" class="pill-btn primary" type="button" data-i18n="index.telegram">Отправить в Telegram</button>
+              <a id="go-discord" class="pill-btn" target="_blank" rel="noopener noreferrer" data-discord-link data-i18n="index.discordFlow">Продолжить в Discord</a>
+            </div>
+            <label class="field-full" style="margin-top: 12px;">
+              <span data-i18n="apply.previewLabel">Готовый текст заявки</span>
+              <textarea id="apply-preview" readonly></textarea>
+            </label>
+            <p id="apply-error" class="form-note" aria-live="polite"></p>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span data-year></span> <span data-i18n="footer.rights">RusLand Server</span></span>
+      <span data-i18n="footer.note">Сайт для набора игроков и актуальной информации</span>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section class="section dark reveal" id="whitelist">
-  <div class="container center">
-    <h2>Врата Королевства (Whitelist)</h2>
-    <p class="big-text">Земли закрыты для чужаков. Проход через врата требует личного одобрения стражи Короны.</p>
-    <div class="ip-highlight">IP: rusland5.sosal.today</div>
-    <a href="https://t.me/slimefrozik" target="_blank" class="cta tg-btn">Отправить гонца в Telegram</a>
-  </div>
-</section>
-
-<footer>
-  © 2026 RUSLAND V СЕЗОН
-</footer>
-
-<div class="notification" id="notification">Свиток с адресом спрятан в вашу сумку</div>
-
-<script>
-// Копирование IP с магическим уведомлением
-function copyIP(){
-  navigator.clipboard.writeText("rusland5.sosal.today").then(() => {
-    const n = document.getElementById("notification");
-    n.classList.add("show");
-    setTimeout(() => n.classList.remove("show"), 3000);
-  });
-}
-
-// Плавное появление элементов при скролле
-const reveals = document.querySelectorAll(".reveal");
-function checkReveal() {
-  reveals.forEach(el => {
-    if(el.getBoundingClientRect().top < window.innerHeight - 150){
-      el.classList.add("active");
-    }
-  });
-}
-window.addEventListener("scroll", checkReveal);
-checkReveal();
-
-// Магия 3D Карточек (Vanilla JS Tilt Effect)
-const cards = document.querySelectorAll('.tilt-card');
-cards.forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; 
-    const y = e.clientY - rect.top;
-    
-    // Вычисляем угол наклона (максимум 10 градусов)
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  });
-  
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-  });
-});
-
-// Улучшенная система искр (Живой Огонь)
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-let particles = [];
-// Создаем больше искр
-for(let i = 0; i < 100; i++){
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2.5 + 0.5, // Радиус
-    d: Math.random() * 2 + 0.5,   // Скорость подъема
-    wind: Math.random() * 0.5 - 0.25, // Влияние ветра
-    o: Math.random() * 0.8 + 0.2, // Прозрачность
-    blinkRate: Math.random() * 0.02 + 0.01 // Скорость мерцания
-  });
-}
-
-let time = 0;
-
-function draw(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  time += 0.01;
-  
-  // Глобальный ветер, меняющийся со временем
-  let globalWind = Math.sin(time) * 0.5;
-
-  particles.forEach(p => {
-    // Эффект свечения (Bloom)
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "rgba(255, 140, 0, 0.8)"; 
-    
-    // Пульсация прозрачности
-    p.o += Math.sin(time * 10 + p.blinkRate * 1000) * 0.01;
-    if(p.o > 1) p.o = 1;
-    if(p.o < 0.1) p.o = 0.1;
-
-    ctx.fillStyle = `rgba(255, ${150 + Math.random()*50}, 50, ${p.o})`;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fill();
-    
-    // Искры летят вверх по спирали
-    p.y -= p.d;
-    p.x += Math.sin(p.y * 0.05) * 0.5 + p.wind + globalWind; 
-    
-    // Возвращаем искры вниз
-    if(p.y < -10){
-      p.y = canvas.height + 10;
-      p.x = Math.random() * canvas.width;
-      p.o = 0; // Начинают невидимыми
-    }
-    
-    // Сбрасываем тени, чтобы не тормозило
-    ctx.shadowBlur = 0; 
-  });
-  requestAnimationFrame(draw);
-}
-requestAnimationFrame(draw);
-</script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
+
+
+
+
+
