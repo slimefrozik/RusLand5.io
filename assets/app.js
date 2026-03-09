@@ -285,9 +285,22 @@ function setupLanguageSwitch() {
 function setupMobileMenu() {
   const toggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("primary-nav");
-  if (!toggle || !nav) {
+  const topbar = document.querySelector(".topbar");
+  if (!toggle || !nav || !topbar) {
     return;
   }
+
+  const syncNavLayout = () => {
+    const byWidth = window.matchMedia("(max-width: 1520px)").matches;
+    const byOverflow = nav.scrollWidth > nav.clientWidth + 1;
+    const compact = byWidth || byOverflow;
+    document.body.classList.toggle("nav-compact", compact);
+    if (!compact) {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+    nav.scrollLeft = 0;
+  };
 
   toggle.addEventListener("click", () => {
     const isOpen = nav.classList.toggle("open");
@@ -300,6 +313,10 @@ function setupMobileMenu() {
       toggle.setAttribute("aria-expanded", "false");
     });
   });
+
+  window.addEventListener("resize", syncNavLayout);
+  document.addEventListener("rusland:language-changed", syncNavLayout);
+  syncNavLayout();
 }
 
 function setupCopyIp() {
@@ -1142,48 +1159,39 @@ function renderPageDynamic() {
 }
 
 async function loadDataForPage() {
+  const pickEmbeddedList = (embedded, key) => {
+    const direct = embedded?.[key];
+    if (Array.isArray(direct)) {
+      return direct;
+    }
+    if (direct && Array.isArray(direct[key])) {
+      return direct[key];
+    }
+    return undefined;
+  };
+
   const i18nData = await loadJsonWithEmbeddedFallback("data/i18n.json", (embedded) => embedded.i18n);
   if (i18nData && typeof i18nData === "object") {
     state.i18n = i18nData;
   }
 
   if (PAGE === "mods") {
-    const modsData = await loadJsonWithEmbeddedFallback("data/mods.json", (embedded) => {
-      if (Array.isArray(embedded.mods)) {
-        return embedded.mods;
-      }
-      return undefined;
-    });
+    const modsData = await loadJsonWithEmbeddedFallback("data/mods.json", (embedded) => pickEmbeddedList(embedded, "mods"));
     state.mods = Array.isArray(modsData) ? modsData : (Array.isArray(modsData?.mods) ? modsData.mods : []);
   }
 
   if (PAGE === "updates") {
-    const updatesData = await loadJsonWithEmbeddedFallback("data/updates.json", (embedded) => {
-      if (Array.isArray(embedded.updates)) {
-        return embedded.updates;
-      }
-      return undefined;
-    });
+    const updatesData = await loadJsonWithEmbeddedFallback("data/updates.json", (embedded) => pickEmbeddedList(embedded, "updates"));
     state.updates = Array.isArray(updatesData) ? updatesData : (Array.isArray(updatesData?.updates) ? updatesData.updates : []);
   }
 
   if (PAGE === "plugins") {
-    const pluginsData = await loadJsonWithEmbeddedFallback("data/plugins.json", (embedded) => {
-      if (Array.isArray(embedded.plugins)) {
-        return embedded.plugins;
-      }
-      return undefined;
-    });
+    const pluginsData = await loadJsonWithEmbeddedFallback("data/plugins.json", (embedded) => pickEmbeddedList(embedded, "plugins"));
     state.plugins = Array.isArray(pluginsData) ? pluginsData : (Array.isArray(pluginsData?.plugins) ? pluginsData.plugins : []);
   }
 
   if (PAGE === "challenges") {
-    const challengesData = await loadJsonWithEmbeddedFallback("data/challenges.json", (embedded) => {
-      if (Array.isArray(embedded.challenges)) {
-        return embedded.challenges;
-      }
-      return undefined;
-    });
+    const challengesData = await loadJsonWithEmbeddedFallback("data/challenges.json", (embedded) => pickEmbeddedList(embedded, "challenges"));
     state.challenges = Array.isArray(challengesData) ? challengesData : (Array.isArray(challengesData?.challenges) ? challengesData.challenges : []);
   }
 }

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RusLand — Рекомендованные моды</title>
-  <meta name="description" content="Топ полезных модов с Modrinth для игроков RusLand: FPS, QoL, карта, визуал, контент.">
+  <title>RusLand — Работа и обратная связь</title>
+  <meta name="description" content="Работа у нас, идеи и баг-репорты — всё в одном канале Telegram.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="RusLand — Рекомендованные моды">
-  <meta property="og:description" content="Подборка модов для стабильной игры на сервере RusLand.">
+  <meta property="og:title" content="RusLand — Работа и обратная связь">
+  <meta property="og:description" content="Хочешь в команду, есть предложение или нашёл баг? Напиши напрямую в Telegram.">
   <meta property="og:image" content="assets/og-cover.svg">
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="RusLand — Рекомендованные моды">
-  <meta property="twitter:description" content="Modrinth-подборка для FPS, удобства и контента.">
+  <meta property="twitter:title" content="RusLand — Работа и обратная связь">
+  <meta property="twitter:description" content="Один канал для заявок в команду, идей и баг-репортов.">
   <meta property="twitter:image" content="assets/og-cover.svg">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
   <script src="data/telegram-config.js" defer></script>
   <script src="assets/app.js" defer></script>
 </head>
-<body data-page="mods">
+<body data-page="jobs">
   <header class="site-header">
     <div class="container topbar">
       <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">RusLand</span></a>
@@ -29,12 +29,12 @@
       <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
         <a href="index.html" data-i18n="nav.home">Главная</a>
         <a href="start.html" data-i18n="nav.start">Начать играть</a>
-        <a href="mods.html" aria-current="page" data-i18n="nav.mods">Моды</a>
+        <a href="mods.html" data-i18n="nav.mods">Моды</a>
         <a href="updates.html" data-i18n="nav.updates">Обновления</a>
         <a href="challenges.html" data-i18n="nav.challenges">Челленджи</a>
         <a href="rules.html" data-i18n="nav.rules">Правила/FAQ</a>
         <a href="plugins.html" data-i18n="nav.plugins">Плагины</a>
-        <a href="jobs.html" data-i18n="nav.jobs">Работа у нас</a>
+        <a href="jobs.html" aria-current="page" data-i18n="nav.jobs">Работа у нас</a>
       </nav>
       <div class="actions">
         <div class="lang-switch" aria-label="Language"><button type="button" data-lang-switch="ru">RU</button><button type="button" data-lang-switch="ua">UA</button></div>
@@ -48,25 +48,29 @@
   <main>
     <section class="page-intro">
       <div class="container">
-        <h1 data-i18n="mods.title">Рекомендованные моды</h1>
-        <p data-i18n="mods.subtitle">Топ модов с Modrinth для стабильной игры, удобства и красивой картинки.</p>
+        <h1 data-i18n="jobs.title">Работа у нас и связь с командой</h1>
+        <p data-i18n="jobs.subtitle">Один канал для заявок в команду, предложений по серверу и баг-репортов.</p>
       </div>
     </section>
 
     <section class="section">
-      <div class="container">
-        <div class="filters">
-          <label>
-            <span data-i18n="mods.search">Поиск по модам</span>
-            <input id="mods-search" type="search" data-i18n-placeholder="mods.searchPlaceholder" placeholder="Введи название или тег">
-          </label>
-          <label>
-            <span data-i18n="mods.category">Категория</span>
-            <select id="mods-category"></select>
-          </label>
-        </div>
+      <div class="container hero-grid">
+        <article class="panel reveal">
+          <h2 class="section-title" data-i18n="jobs.blockTitle">Что можно написать</h2>
+          <ul class="rules-list">
+            <li data-i18n="jobs.item1">Хочешь помогать проекту: модерация, контент, тесты, организация.</li>
+            <li data-i18n="jobs.item2">Есть идея, как улучшить экономику, ивенты, баланс или удобство.</li>
+            <li data-i18n="jobs.item3">Нашёл баг, ошибку текста или визуальный сбой на сайте/сервере.</li>
+          </ul>
+        </article>
 
-        <div id="mods-list" class="mods-grid"></div>
+        <article class="panel reveal">
+          <h2 class="section-title" data-i18n="jobs.ctaTitle">Написать напрямую</h2>
+          <p class="section-subtitle" data-i18n="jobs.ctaSub">Кнопка откроет Telegram с вашим сообщением в личку.</p>
+          <div class="cta-row">
+            <a class="pill-btn primary" data-feedback-link target="_blank" rel="noopener noreferrer" data-i18n="jobs.cta">Работа, идеи и баг-репорты в Telegram</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -81,9 +85,3 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
-
-
-
-
-
-
