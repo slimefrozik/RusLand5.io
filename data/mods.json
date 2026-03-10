@@ -7,8 +7,16 @@
       "modrinthUrl": "https://modrinth.com/mod/sodium",
       "summary": "Повышает FPS и делает игру стабильнее на слабых и средних ПК.",
       "summaryUa": "Підвищує FPS і робить гру стабільнішою на слабких та середніх ПК.",
-      "tags": ["FPS", "Client", "Fabric/NeoForge"],
-      "tagsUa": ["FPS", "Клієнт", "Fabric/NeoForge"]
+      "tags": [
+        "FPS",
+        "Client",
+        "Fabric/NeoForge"
+      ],
+      "tagsUa": [
+        "FPS",
+        "Клієнт",
+        "Fabric/NeoForge"
+      ]
     },
     {
       "name": "Lithium",
@@ -17,8 +25,16 @@
       "modrinthUrl": "https://modrinth.com/mod/lithium",
       "summary": "Оптимизация физики и AI без изменения ванильного геймплея.",
       "summaryUa": "Оптимізація фізики та AI без зміни ванільного геймплею.",
-      "tags": ["TPS", "Server+Client", "Vanilla-like"],
-      "tagsUa": ["TPS", "Сервер+Клієнт", "Vanilla-like"]
+      "tags": [
+        "TPS",
+        "Server+Client",
+        "Vanilla-like"
+      ],
+      "tagsUa": [
+        "TPS",
+        "Сервер+Клієнт",
+        "Vanilla-like"
+      ]
     },
     {
       "name": "FerriteCore",
@@ -27,8 +43,16 @@
       "modrinthUrl": "https://modrinth.com/mod/ferrite-core",
       "summary": "Снижает потребление RAM, полезно для больших сборок.",
       "summaryUa": "Знижує використання RAM, корисно для великих збірок.",
-      "tags": ["Memory", "Client", "Forge/Fabric"],
-      "tagsUa": ["Пам'ять", "Клієнт", "Forge/Fabric"]
+      "tags": [
+        "Memory",
+        "Client",
+        "Forge/Fabric"
+      ],
+      "tagsUa": [
+        "Пам'ять",
+        "Клієнт",
+        "Forge/Fabric"
+      ]
     },
     {
       "name": "Iris Shaders",
@@ -37,8 +61,16 @@
       "modrinthUrl": "https://modrinth.com/mod/iris",
       "summary": "Поддержка шейдеров с хорошей совместимостью и гибкими настройками.",
       "summaryUa": "Підтримка шейдерів з гарною сумісністю та гнучкими налаштуваннями.",
-      "tags": ["Shaders", "Client", "Visual"],
-      "tagsUa": ["Шейдери", "Клієнт", "Візуал"]
+      "tags": [
+        "Shaders",
+        "Client",
+        "Visual"
+      ],
+      "tagsUa": [
+        "Шейдери",
+        "Клієнт",
+        "Візуал"
+      ]
     },
     {
       "name": "Mod Menu",
@@ -47,8 +79,16 @@
       "modrinthUrl": "https://modrinth.com/mod/modmenu",
       "summary": "Удобный список модов и быстрый доступ к настройкам.",
       "summaryUa": "Зручний список модів і швидкий доступ до налаштувань.",
-      "tags": ["UI", "Client", "Settings"],
-      "tagsUa": ["UI", "Клієнт", "Налаштування"]
+      "tags": [
+        "UI",
+        "Client",
+        "Settings"
+      ],
+      "tagsUa": [
+        "UI",
+        "Клієнт",
+        "Налаштування"
+      ]
     },
     {
       "name": "Xaero's Minimap",
@@ -57,8 +97,16 @@
       "modrinthUrl": "https://modrinth.com/mod/xaeros-minimap",
       "summary": "Миникарта с метками, дорогами и точками интереса.",
       "summaryUa": "Мінікарта з мітками, дорогами та точками інтересу.",
-      "tags": ["Map", "Navigation", "Client"],
-      "tagsUa": ["Мапа", "Навігація", "Клієнт"]
+      "tags": [
+        "Map",
+        "Navigation",
+        "Client"
+      ],
+      "tagsUa": [
+        "Мапа",
+        "Навігація",
+        "Клієнт"
+      ]
     },
     {
       "name": "Xaero's World Map",
@@ -67,8 +115,16 @@
       "modrinthUrl": "https://modrinth.com/mod/xaeros-world-map",
       "summary": "Полноэкранная карта мира с историей исследования.",
       "summaryUa": "Повноекранна мапа світу з історією дослідження.",
-      "tags": ["Map", "World", "Client"],
-      "tagsUa": ["Мапа", "Світ", "Клієнт"]
+      "tags": [
+        "Map",
+        "World",
+        "Client"
+      ],
+      "tagsUa": [
+        "Мапа",
+        "Світ",
+        "Клієнт"
+      ]
     },
     {
       "name": "Voice Chat Interaction",
@@ -77,8 +133,16 @@
       "modrinthUrl": "https://modrinth.com/mod/simple-voice-chat",
       "summary": "Клиентский мод для удобной работы с PlasmoVoice/voice-чата.",
       "summaryUa": "Клієнтський мод для зручної роботи з PlasmoVoice/voice-чатом.",
-      "tags": ["Voice", "Teamplay", "Client"],
-      "tagsUa": ["Голос", "Команда", "Клієнт"]
+      "tags": [
+        "Voice",
+        "Teamplay",
+        "Client"
+      ],
+      "tagsUa": [
+        "Голос",
+        "Команда",
+        "Клієнт"
+      ]
     },
     {
       "name": "Entity Culling",
@@ -87,8 +151,16 @@
       "modrinthUrl": "https://modrinth.com/mod/entityculling",
       "summary": "Не рендерит скрытые сущности и блоки, что повышает FPS.",
       "summaryUa": "Не рендерить приховані сутності та блоки, що підвищує FPS.",
-      "tags": ["FPS", "Render", "Client"],
-      "tagsUa": ["FPS", "Рендер", "Клієнт"]
+      "tags": [
+        "FPS",
+        "Render",
+        "Client"
+      ],
+      "tagsUa": [
+        "FPS",
+        "Рендер",
+        "Клієнт"
+      ]
     },
     {
       "name": "AppleSkin",
@@ -97,8 +169,16 @@
       "modrinthUrl": "https://modrinth.com/mod/appleskin",
       "summary": "Показывает насыщение и голод, помогает в боях и выживании.",
       "summaryUa": "Показує насичення і голод, допомагає в боях і виживанні.",
-      "tags": ["HUD", "Combat", "Survival"],
-      "tagsUa": ["HUD", "Бій", "Виживання"]
+      "tags": [
+        "HUD",
+        "Combat",
+        "Survival"
+      ],
+      "tagsUa": [
+        "HUD",
+        "Бій",
+        "Виживання"
+      ]
     },
     {
       "name": "ReplayMod",
@@ -107,8 +187,16 @@
       "modrinthUrl": "https://modrinth.com/mod/replaymod",
       "summary": "Запись красивых роликов и обзоров по твоей базе.",
       "summaryUa": "Запис красивих роликів та оглядів твоєї бази.",
-      "tags": ["Video", "Creator", "Client"],
-      "tagsUa": ["Відео", "Креатор", "Клієнт"]
+      "tags": [
+        "Video",
+        "Creator",
+        "Client"
+      ],
+      "tagsUa": [
+        "Відео",
+        "Креатор",
+        "Клієнт"
+      ]
     },
     {
       "name": "Tweakeroo",
@@ -117,8 +205,16 @@
       "modrinthUrl": "https://modrinth.com/mod/tweakeroo",
       "summary": "Набор продвинутых инструментов для строителей и технарей.",
       "summaryUa": "Набір просунутих інструментів для будівельників і технарів.",
-      "tags": ["Building", "Utility", "Client"],
-      "tagsUa": ["Будівництво", "Утиліти", "Клієнт"]
+      "tags": [
+        "Building",
+        "Utility",
+        "Client"
+      ],
+      "tagsUa": [
+        "Будівництво",
+        "Утиліти",
+        "Клієнт"
+      ]
     }
   ]
 }

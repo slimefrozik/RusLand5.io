@@ -22,8 +22,7 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="data/telegram-config.js" defer></script>
-  <script src="assets/react-spotlight.js" defer></script>
-  <script src="assets/app.js" defer></script>
+    <script src="assets/app.js" defer></script>
 </head>
 <body data-page="index">
   <header class="site-header">
@@ -32,8 +31,6 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-text">RusLand</span>
       </a>
-
-      <button class="menu-toggle" id="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-i18n="common.menu">Меню</button>
 
       <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
         <a href="index.html" aria-current="page" data-i18n="nav.home">Главная</a>
@@ -47,13 +44,17 @@
       </nav>
 
       <div class="actions">
-        <div class="lang-switch" aria-label="Language">
-          <button type="button" data-lang-switch="ru">RU</button>
-          <button type="button" data-lang-switch="ua">UA</button>
+        <div class="lang-menu" data-lang-menu>
+          <button class="lang-toggle" type="button" data-lang-toggle data-i18n="common.lang" aria-expanded="false">Язык</button>
+          <div class="lang-options" role="menu">
+            <button type="button" data-lang-switch="ru"><span class="flag">🇷🇺</span><span>RU</span></button>
+            <button type="button" data-lang-switch="ua"><span class="flag">🇺🇦</span><span>UA</span></button>
+            <button type="button" data-lang-switch="be"><span class="flag">🇧🇾</span><span>BE</span></button>
+            <button type="button" data-lang-switch="kk"><span class="flag">🇰🇿</span><span>KZ</span></button>
+          </div>
         </div>
         <a class="pill-btn primary" href="index.html#apply-section" data-i18n="common.apply">Подать заявку</a>
         <a class="pill-btn" data-discord-link target="_blank" rel="noopener noreferrer" data-i18n="common.discord">В Discord</a>
-        <button class="pill-btn" type="button" data-copy-ip data-i18n="common.copyIp">Скопировать IP</button>
       </div>
     </div>
   </header>
@@ -63,10 +64,10 @@
       <div class="container hero-grid">
         <article class="panel reveal">
           <h1 class="crest" data-i18n="index.title">RusLand — сервер, где хочется остаться надолго</h1>
-          <p class="subtitle" data-i18n="index.subtitle">Здесь каждый вечер есть цель: от своей базы и торговли до совместных вылазок на боссов.</p>
+          <p class="subtitle" data-i18n="index.subtitle">Каждый найдёт своё место.</p>
 
           <div class="stat-row">
-            <div class="stat"><strong data-i18n="common.serverIpLabel">IP сервера</strong>: <span data-server-ip>rusland5.20tps.ru</span></div>
+            <div class="stat is-row"><strong data-i18n="common.serverIpLabel">IP сервера</strong>: <span data-server-ip>rusland5.20tps.ru</span><button class="pill-btn is-compact" type="button" data-copy-ip data-i18n="common.copyIp">Скопировать IP</button></div>
             <div class="stat"><strong data-i18n="common.versionLabel">Версия</strong>: <span data-server-version>1.21.10</span></div>
             <div class="stat"><strong data-i18n="common.platformLabel">Платформа</strong>: <span data-server-platform>Java</span></div>
           </div>
@@ -74,13 +75,13 @@
           <div class="cta-row">
             <a class="pill-btn primary" href="#apply-section" data-i18n="common.apply">Подать заявку</a>
             <a class="pill-btn" data-discord-link target="_blank" rel="noopener noreferrer" data-i18n="common.discord">В Discord</a>
-            <a class="pill-btn" href="start.html" data-i18n="common.ctaStart">Быстрый старт</a>
+            <a class="pill-btn" href="start.html" data-i18n="common.ctaStart">Как зайти?</a>
           </div>
         </article>
 
         <aside class="panel reveal">
           <h2 class="section-title" data-i18n="index.statusCardTitle">Статус мира</h2>
-          <p class="section-subtitle" data-i18n="index.statusCardText">Проверь онлайн, подай заявку и заходи: стартовать можно в любом темпе, а контент всегда под рукой.</p>
+          <p class="section-subtitle" data-i18n="index.statusCardText">Будет полезно:</p>
           <div class="stat"><strong data-i18n="common.playersLabel">Игроки</strong>: <span id="server-status">...</span></div>
 
           <div class="stack" style="margin-top: 14px;">
@@ -94,34 +95,12 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section-title" data-i18n="index.pathTitle">Старт без путаницы</h2>
-        <p class="section-subtitle" data-i18n="index.pathSub">Три шага, чтобы быстро попасть в игру и не потеряться на входе.</p>
+        <h2 class="section-title" data-i18n="index.pathTitle">Как зайти?</h2>
+        <p class="section-subtitle" data-i18n="index.pathSub">Тут всё просто:</p>
         <div class="card-grid">
-          <article class="card reveal"><h3 data-i18n="index.s1t">1. Скопируй IP</h3><p data-i18n="index.s1d">Зайди на сервер с Java 1.21.10 и осмотрись без спешки.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.s2t">2. Заполни короткую анкету</h3><p data-i18n="index.s2d">4 поля, черновик сохраняется автоматически в браузере.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.s3t">3. Отправь в Telegram</h3><p data-i18n="index.s3d">Откроется бот с готовой заявкой: проверь текст и нажми «Отправить».</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div id="react-spotlight" class="panel reveal"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title" data-i18n="index.featuresTitle">Что есть на сервере для ежедневной игры</h2>
-        <p class="section-subtitle" data-i18n="index.featuresSub">Ключевые механики, которые заметны в обычной игре с первого дня.</p>
-
-        <div class="feature-grid">
-          <article class="card reveal"><h3 data-i18n="index.f1t">Живой аукцион</h3><p data-i18n="index.f1d">AuctionHouse и TradePost дают понятную экономику и быстрый оборот вещей.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.f2t">Прогресс с боссами</h3><p data-i18n="index.f2d">DragonBoss, WorldBoss и MythicMobs создают контент для групп и соло игроков.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.f3t">Голос рядом</h3><p data-i18n="index.f3d">PlasmoVoice делает кооп, вылазки и переговоры действительно живыми.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.f4t">Честная игра</h3><p data-i18n="index.f4d">GrimAC + CoreProtect: защита от читов и восстановление после конфликтов.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.f5t">Удобный старт</h3><p data-i18n="index.f5d">AuthMe, DailyReward и разблокировка рецептов помогают войти в игру без боли.</p></article>
-          <article class="card reveal"><h3 data-i18n="index.f6t">Производительность</h3><p data-i18n="index.f6d">Chunky, LagFixer и spark держат стабильность в пиковые часы.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.s1t">1. Подать заявку</h3><p data-i18n="index.s1d">Заполни короткую анкету.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.s2t">2. Дождаться одобрения</h3><p data-i18n="index.s2d">Модераторы рассмотрят вашу заявку.</p></article>
+          <article class="card reveal"><h3 data-i18n="index.s3t">3. Зайти по IP</h3><p data-i18n="index.s3d">Подключись к серверу и начни играть.</p></article>
         </div>
       </div>
     </section>
@@ -129,27 +108,22 @@
     <section class="section">
       <div class="container">
         <h2 class="section-title" data-i18n="index.galleryTitle">Галерея сервера</h2>
-        <p class="section-subtitle" data-i18n="index.gallerySub">Реальные кадры с сервера: база, поселения и атмосферные локации.</p>
+        <p class="section-subtitle" data-i18n="index.gallerySub">Попасть сюда может каждый.</p>
         <div class="gallery">
           <figure class="reveal shot-1" data-lightbox-src="data/image5.png" data-lightbox-alt="Вид на поселение в цветущем биоме">
             <img src="data/image5.png" alt="Вид на поселение в цветущем биоме" loading="lazy">
-            <figcaption data-i18n="index.g1">Вид на поселение</figcaption>
           </figure>
           <figure class="reveal shot-2" data-lightbox-src="data/image2.png" data-lightbox-alt="Дом игрока и стартовая зона">
             <img src="data/image2.png" alt="Дом игрока и стартовая зона" loading="lazy">
-            <figcaption data-i18n="index.g2">Уютная стартовая база</figcaption>
           </figure>
           <figure class="reveal shot-3" data-lightbox-src="data/image3.png" data-lightbox-alt="Беседка и прогулочная зона">
             <img src="data/image3.png" alt="Беседка и прогулочная зона" loading="lazy">
-            <figcaption data-i18n="index.g3">Общая зона отдыха</figcaption>
           </figure>
           <figure class="reveal shot-4" data-lightbox-src="data/image4.png" data-lightbox-alt="Интерьер декоративной базы">
             <img src="data/image4.png" alt="Интерьер декоративной базы" loading="lazy">
-            <figcaption data-i18n="index.g4">Детализированные интерьеры</figcaption>
           </figure>
           <figure class="reveal shot-5" data-lightbox-src="data/screen1.jpg" data-lightbox-alt="Пейзаж в цветущем биоме">
             <img src="data/screen1.jpg" alt="Пейзаж в цветущем биоме" loading="lazy">
-            <figcaption data-i18n="index.g5">Атмосферные пейзажи</figcaption>
           </figure>
         </div>
       </div>
@@ -158,8 +132,8 @@
     <section class="section" id="apply-section">
       <div class="container">
         <article class="panel reveal">
-          <h2 class="section-title" data-i18n="index.applyTitle">Короткая заявка в whitelist</h2>
-          <p class="section-subtitle" data-i18n="index.applySub">Заполни 4 поля. Нажми «Отправить в Telegram» — текст заявки скопируется, и откроется бот.</p>
+          <h2 class="section-title" data-i18n="index.applyTitle">Анкета для whitelist</h2>
+          <p class="section-subtitle" data-i18n="index.applySub">Заполни 3 поля. Отправь в Telegram|Discord. Жди ответа модерации.</p>
 
           <form id="apply-form" novalidate>
             <div class="form-grid">
@@ -179,8 +153,8 @@
               </label>
 
               <label class="field-full">
-                <span data-i18n="apply.labelWhy">Почему хочешь к нам</span>
-                <textarea id="apply-why" minlength="10" maxlength="500" required data-i18n-placeholder="apply.placeholderWhy" placeholder="Коротко о себе и как планируешь играть на сервере"></textarea>
+                <span data-i18n="apply.labelWhy">Поделись секретами о себе</span>
+                <textarea id="apply-why" maxlength="500" data-i18n-placeholder="apply.placeholderWhy" placeholder="Ускоряет рассмотрение заявки (необязательно)."></textarea>
               </label>
             </div>
 
@@ -202,13 +176,14 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>© <span data-year></span> <span data-i18n="footer.rights">RusLand Server</span></span>
-      <span data-i18n="footer.note">Сайт для набора игроков и актуальной информации</span>
+      <span data-i18n="footer.note">prod. by AI</span>
     </div>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
+
 
 
 

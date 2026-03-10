@@ -25,7 +25,6 @@
   <header class="site-header">
     <div class="container topbar">
       <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">RusLand</span></a>
-      <button class="menu-toggle" id="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-i18n="common.menu">Меню</button>
       <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
         <a href="index.html" data-i18n="nav.home">Главная</a>
         <a href="start.html" data-i18n="nav.start">Начать играть</a>
@@ -37,10 +36,17 @@
         <a href="jobs.html" aria-current="page" data-i18n="nav.jobs">Работа у нас</a>
       </nav>
       <div class="actions">
-        <div class="lang-switch" aria-label="Language"><button type="button" data-lang-switch="ru">RU</button><button type="button" data-lang-switch="ua">UA</button></div>
+        <div class="lang-menu" data-lang-menu>
+          <button class="lang-toggle" type="button" data-lang-toggle data-i18n="common.lang" aria-expanded="false">Язык</button>
+          <div class="lang-options" role="menu">
+            <button type="button" data-lang-switch="ru"><span class="flag">🇷🇺</span><span>RU</span></button>
+            <button type="button" data-lang-switch="ua"><span class="flag">🇺🇦</span><span>UA</span></button>
+            <button type="button" data-lang-switch="be"><span class="flag">🇧🇾</span><span>BE</span></button>
+            <button type="button" data-lang-switch="kk"><span class="flag">🇰🇿</span><span>KZ</span></button>
+          </div>
+        </div>
         <a class="pill-btn primary" href="index.html#apply-section" data-i18n="common.apply">Подать заявку</a>
         <a class="pill-btn" data-discord-link target="_blank" rel="noopener noreferrer" data-i18n="common.discord">В Discord</a>
-        <button class="pill-btn" type="button" data-copy-ip data-i18n="common.copyIp">Скопировать IP</button>
       </div>
     </div>
   </header>
@@ -48,8 +54,8 @@
   <main>
     <section class="page-intro">
       <div class="container">
-        <h1 data-i18n="jobs.title">Работа у нас и связь с командой</h1>
-        <p data-i18n="jobs.subtitle">Один канал для заявок в команду, предложений по серверу и баг-репортов.</p>
+        <h1 data-i18n="jobs.title">Работа у нас</h1>
+        <p data-i18n="jobs.subtitle">Составляй и отправляй своё резюме.</p>
       </div>
     </section>
 
@@ -78,7 +84,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <span>© <span data-year></span> <span data-i18n="footer.rights">RusLand Server</span></span>
-      <span data-i18n="footer.note">Сайт для набора игроков и актуальной информации</span>
+      <span data-i18n="footer.note">prod. by AI</span>
     </div>
   </footer>
 

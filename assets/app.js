@@ -11,8 +11,9 @@ const PAGE = document.body.dataset.page || "index";
 const STORAGE_LANG_KEY = "rusland_lang";
 const STORAGE_APPLY_DRAFT_KEY = "rusland_apply_draft_v1";
 const STORAGE_MUSIC_KEY = "rusland_music_enabled";
+const STORAGE_MUSIC_VOLUME_KEY = "rusland_music_volume";
 const STORAGE_CHALLENGE_STREAK_KEY = "rusland_challenge_streak_v1";
-const SUPPORTED_LANGS = ["ru", "ua"];
+const SUPPORTED_LANGS = ["ru", "ua", "be", "kk"];
 const EMBEDDED_DATA_PATH = "data/content.js";
 const TELEGRAM_DELIVERY = window.RUSLAND_TELEGRAM || {};
 const LANG_QUERY_PARAM = "lang";
@@ -20,7 +21,7 @@ let embeddedDataPromise = null;
 
 const state = {
   lang: "ru",
-  i18n: { ru: {}, ua: {} },
+  i18n: { ru: {}, ua: {}, be: {}, kk: {} },
   mods: [],
   updates: [],
   plugins: [],
@@ -43,10 +44,11 @@ function t(key, fallback = "") {
 }
 
 function getLocalizedField(item, baseField) {
-  if (state.lang === "ua") {
-    const uaField = `${baseField}Ua`;
-    if (typeof item?.[uaField] === "string" && item[uaField].trim()) {
-      return item[uaField];
+  const suffix = state.lang === "ua" ? "Ua" : state.lang === "be" ? "Be" : state.lang === "kk" ? "Kk" : "";
+  if (suffix) {
+    const localizedField = `${baseField}${suffix}`;
+    if (typeof item?.[localizedField] === "string" && item[localizedField].trim()) {
+      return item[localizedField];
     }
   }
   return item?.[baseField] || "";
@@ -176,7 +178,8 @@ function setCoreFields() {
 }
 
 function translateStaticText() {
-  document.documentElement.lang = state.lang === "ua" ? "uk" : "ru";
+  const htmlLang = state.lang === "ua" ? "uk" : state.lang === "be" ? "be" : state.lang === "kk" ? "kk" : "ru";
+  document.documentElement.lang = htmlLang;
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.getAttribute("data-i18n");
@@ -272,8 +275,7 @@ function setLanguage(language, options = {}) {
 function setupLanguageSwitch() {
   const fromUrl = getLangFromUrl();
   const savedLang = localStorage.getItem(STORAGE_LANG_KEY);
-  const browserLang = navigator.language.toLowerCase();
-  state.lang = fromUrl || (savedLang && SUPPORTED_LANGS.includes(savedLang) ? savedLang : (browserLang.startsWith("uk") ? "ua" : "ru"));
+    state.lang = fromUrl || (savedLang && SUPPORTED_LANGS.includes(savedLang) ? savedLang : "ru");
 
   document.querySelectorAll("[data-lang-switch]").forEach((button) => {
     button.addEventListener("click", () => setLanguage(button.dataset.langSwitch || "ru", { syncUrl: true }));
@@ -282,41 +284,50 @@ function setupLanguageSwitch() {
   setLanguage(state.lang, { syncUrl: true });
 }
 
-function setupMobileMenu() {
-  const toggle = document.getElementById("nav-toggle");
-  const nav = document.getElementById("primary-nav");
-  const topbar = document.querySelector(".topbar");
-  if (!toggle || !nav || !topbar) {
+function setupLanguageMenu() {
+  const menus = document.querySelectorAll("[data-lang-menu]");
+  if (!menus.length) {
     return;
   }
 
-  const syncNavLayout = () => {
-    const byWidth = window.matchMedia("(max-width: 1520px)").matches;
-    const byOverflow = nav.scrollWidth > nav.clientWidth + 1;
-    const compact = byWidth || byOverflow;
-    document.body.classList.toggle("nav-compact", compact);
-    if (!compact) {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
+  menus.forEach((menu) => {
+    const toggle = menu.querySelector("[data-lang-toggle]");
+    if (!toggle) {
+      return;
     }
-    nav.scrollLeft = 0;
-  };
 
-  toggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
+    const close = () => {
+      menu.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
-    });
-  });
+    };
 
-  window.addEventListener("resize", syncNavLayout);
-  document.addEventListener("rusland:language-changed", syncNavLayout);
-  syncNavLayout();
+    const sync = () => {
+      const open = menu.classList.contains("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      menu.classList.toggle("is-open");
+      sync();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target)) {
+        close();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        close();
+      }
+    });
+
+    document.addEventListener("rusland:language-changed", close);
+
+    sync();
+  });
 }
 
 function setupCopyIp() {
@@ -421,6 +432,13 @@ function setupMusicPlayer() {
   const label = document.createElement("span");
   label.className = "music-label";
 
+  const volume = document.createElement("input");
+  volume.type = "range";
+  volume.min = "0";
+  volume.max = "1";
+  volume.step = "0.01";
+  volume.className = "music-volume";
+
   const audio = document.createElement("audio");
   audio.src = "music.mp3";
   audio.loop = true;
@@ -441,6 +459,14 @@ function setupMusicPlayer() {
     }
   };
 
+  const persistVolume = (value) => {
+    try {
+      localStorage.setItem(STORAGE_MUSIC_VOLUME_KEY, String(value));
+    } catch (_) {
+      // Ignore storage errors.
+    }
+  };
+
   button.addEventListener("click", async () => {
     if (audio.paused) {
       try {
@@ -456,12 +482,26 @@ function setupMusicPlayer() {
     syncVisual();
   });
 
-  wrap.append(button, label);
+  wrap.append(button, volume, label);
   document.body.append(wrap, audio);
 
   audio.addEventListener("play", syncVisual);
   audio.addEventListener("pause", syncVisual);
   document.addEventListener("rusland:language-changed", syncVisual);
+
+  const storedVolume = parseFloat(localStorage.getItem(STORAGE_MUSIC_VOLUME_KEY) || "0.5");
+  const initialVolume = Number.isFinite(storedVolume) ? storedVolume : 0.5;
+  audio.volume = Math.min(1, Math.max(0, initialVolume));
+  volume.value = String(audio.volume);
+
+  volume.addEventListener("input", () => {
+    const next = parseFloat(volume.value);
+    if (!Number.isFinite(next)) {
+      return;
+    }
+    audio.volume = Math.min(1, Math.max(0, next));
+    persistVolume(audio.volume);
+  });
 
   const shouldPlay = localStorage.getItem(STORAGE_MUSIC_KEY) === "1";
   if (shouldPlay) {
@@ -620,16 +660,17 @@ function setupApplicationForm() {
 
   const buildMessage = () => {
     const draft = getDraft();
-    return [
-      t("apply.messageTitle", "Р—Р°СЏРІРєР° RusLand"),
+    const lines = [
+      t("apply.messageTitle", "ЗАЯВКА В RUSLAND"),
       "",
-      `${t("apply.fieldNick", "РќРёРє")}: ${draft.nick || "-"}`,
-      `${t("apply.fieldAge", "Р’РѕР·СЂР°СЃС‚")}: ${draft.age || "-"}`,
-      `${t("apply.fieldRole", "РћРїС‹С‚/СЂРѕР»СЊ")}: ${draft.role || "-"}`,
-      `${t("apply.fieldWhy", "РџРѕС‡РµРјСѓ Рє РЅР°Рј")}: ${draft.why || "-"}`,
-      `${t("apply.fieldVersion", "Р’РµСЂСЃРёСЏ")}: ${CONFIG.minecraftVersion} ${CONFIG.platform}`,
-      `${t("apply.fieldServer", "РЎРµСЂРІРµСЂ")}: ${CONFIG.serverIp}`
-    ].join("\n");
+      `${t("apply.fieldNick", "Ник")}: ${draft.nick || "-"}`,
+      `${t("apply.fieldAge", "Возраст")}: ${draft.age || "-"}`,
+      `${t("apply.fieldRole", "Опыт/роль")}: ${draft.role || "-"}`
+    ];
+    if (draft.why) {
+      lines.push(`${t("apply.fieldWhy", "Секреты")}: ${draft.why}`);
+    }
+    return lines.join("\n");
   };
 
   const updatePreview = () => {
@@ -717,16 +758,18 @@ function setupApplicationForm() {
       errorNode.textContent = "";
     }
 
-    const message = [
-      t("apply.messageTitle", "Р—Р°СЏРІРєР° RusLand"),
+    const messageLines = [
+      t("apply.messageTitle", "ЗАЯВКА В RUSLAND"),
       "",
-      `${t("apply.fieldNick", "РќРёРє")}: ${nickname}`,
-      `${t("apply.fieldAge", "Р’РѕР·СЂР°СЃС‚")}: ${age}`,
-      `${t("apply.fieldRole", "РћРїС‹С‚/СЂРѕР»СЊ")}: ${role}`,
-      `${t("apply.fieldWhy", "РџРѕС‡РµРјСѓ Рє РЅР°Рј")}: ${why}`,
-      `${t("apply.fieldVersion", "Р’РµСЂСЃРёСЏ")}: ${CONFIG.minecraftVersion} ${CONFIG.platform}`,
-      `${t("apply.fieldServer", "РЎРµСЂРІРµСЂ")}: ${CONFIG.serverIp}`
-    ].join("\n");
+      `${t("apply.fieldNick", "Ник")}: ${nickname}`,
+      `${t("apply.fieldAge", "Возраст")}: ${age}`,
+      `${t("apply.fieldRole", "Опыт/роль")}: ${role}`
+    ];
+    if (why) {
+      messageLines.push(`${t("apply.fieldWhy", "Секреты")}: ${why}`);
+    }
+
+    const message = messageLines.join("\n");
 
     updatePreview();
     saveDraft();
@@ -1198,7 +1241,6 @@ async function loadDataForPage() {
 
 async function init() {
   document.documentElement.classList.add("js-enabled");
-  setupMobileMenu();
   setupCopyIp();
   setupMusicPlayer();
   setupFeedbackButton();
@@ -1213,6 +1255,7 @@ async function init() {
     showToast(`Data loading error: ${error.message}`);
   }
 
+  setupLanguageMenu();
   setupLanguageSwitch();
   renderPageDynamic();
 }
