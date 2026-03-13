@@ -1,5 +1,5 @@
-const CONFIG = {
-  serverIp: "rusland5.20tps.ru",
+﻿const CONFIG = {
+  serverIp: "kyora.20tps.ru",
   minecraftVersion: "1.21.10",
   platform: "Java",
   discordUrl: "https://discord.gg/qVBGNTvapj",
@@ -8,14 +8,12 @@ const CONFIG = {
 };
 
 const PAGE = document.body.dataset.page || "index";
-const STORAGE_LANG_KEY = "rusland_lang";
-const STORAGE_APPLY_DRAFT_KEY = "rusland_apply_draft_v1";
-const STORAGE_MUSIC_KEY = "rusland_music_enabled";
-const STORAGE_MUSIC_VOLUME_KEY = "rusland_music_volume";
-const STORAGE_CHALLENGE_STREAK_KEY = "rusland_challenge_streak_v1";
+const STORAGE_LANG_KEY = "Kyora_lang";
+const STORAGE_APPLY_DRAFT_KEY = "Kyora_apply_draft_v1";
+const STORAGE_CHALLENGE_STREAK_KEY = "Kyora_challenge_streak_v1";
 const SUPPORTED_LANGS = ["ru", "ua", "be", "kk"];
 const EMBEDDED_DATA_PATH = "data/content.js";
-const TELEGRAM_DELIVERY = window.RUSLAND_TELEGRAM || {};
+const TELEGRAM_DELIVERY = window.Kyora_TELEGRAM || {};
 const LANG_QUERY_PARAM = "lang";
 let embeddedDataPromise = null;
 
@@ -63,8 +61,8 @@ async function loadJson(path) {
 }
 
 function getEmbeddedData() {
-  if (window.RUSLAND_DATA && typeof window.RUSLAND_DATA === "object") {
-    return window.RUSLAND_DATA;
+  if (window.Kyora_DATA && typeof window.Kyora_DATA === "object") {
+    return window.Kyora_DATA;
   }
   return null;
 }
@@ -161,7 +159,11 @@ function setCoreFields() {
   });
 
   document.querySelectorAll("[data-discord-link]").forEach((node) => {
-    node.setAttribute("href", CONFIG.discordUrl);
+    node.setAttribute("href", "#");
+    node.addEventListener("click", (event) => {
+      event.preventDefault();
+      showToast(t("common.discordSoonToast", "Discord скоро будет доступен."));
+    });
   });
 
   document.querySelectorAll("[data-telegram-link]").forEach((node) => {
@@ -269,7 +271,7 @@ function setLanguage(language, options = {}) {
   updateLanguageAwareLinks();
   translateStaticText();
   renderPageDynamic();
-  document.dispatchEvent(new CustomEvent("rusland:language-changed"));
+  document.dispatchEvent(new CustomEvent("Kyora:language-changed"));
 }
 
 function setupLanguageSwitch() {
@@ -324,11 +326,12 @@ function setupLanguageMenu() {
       }
     });
 
-    document.addEventListener("rusland:language-changed", close);
+    document.addEventListener("Kyora:language-changed", close);
 
     sync();
   });
 }
+
 
 function setupCopyIp() {
   document.querySelectorAll("[data-copy-ip]").forEach((button) => {
@@ -415,109 +418,6 @@ function extractTelegramUsername(link) {
   }
 }
 
-function setupMusicPlayer() {
-  if (!document.body) {
-    return;
-  }
-
-  const wrap = document.createElement("div");
-  wrap.className = "music-player";
-
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "music-toggle";
-  button.setAttribute("aria-live", "polite");
-  button.textContent = "M";
-
-  const label = document.createElement("span");
-  label.className = "music-label";
-
-  const volume = document.createElement("input");
-  volume.type = "range";
-  volume.min = "0";
-  volume.max = "1";
-  volume.step = "0.01";
-  volume.className = "music-volume";
-
-  const audio = document.createElement("audio");
-  audio.src = "music.mp3";
-  audio.loop = true;
-  audio.preload = "none";
-
-  const syncVisual = () => {
-    const on = !audio.paused;
-    wrap.classList.toggle("is-playing", on);
-    label.textContent = on ? t("common.musicOn", "РњСѓР·С‹РєР°: Р’РљР›") : t("common.musicOff", "РњСѓР·С‹РєР°: Р’Р«РљР›");
-    button.setAttribute("aria-label", on ? t("common.musicPause", "Р’С‹РєР»СЋС‡РёС‚СЊ РјСѓР·С‹РєСѓ") : t("common.musicPlay", "Р’РєР»СЋС‡РёС‚СЊ РјСѓР·С‹РєСѓ"));
-  };
-
-  const persist = (enabled) => {
-    try {
-      localStorage.setItem(STORAGE_MUSIC_KEY, enabled ? "1" : "0");
-    } catch (_) {
-      // Ignore storage errors.
-    }
-  };
-
-  const persistVolume = (value) => {
-    try {
-      localStorage.setItem(STORAGE_MUSIC_VOLUME_KEY, String(value));
-    } catch (_) {
-      // Ignore storage errors.
-    }
-  };
-
-  button.addEventListener("click", async () => {
-    if (audio.paused) {
-      try {
-        await audio.play();
-        persist(true);
-      } catch (_) {
-        showToast(t("common.musicBlocked", "Р‘СЂР°СѓР·РµСЂ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°Р» Р°РІС‚РѕР·Р°РїСѓСЃРє. РќР°Р¶РјРё РµС‰Рµ СЂР°Р·."));
-      }
-    } else {
-      audio.pause();
-      persist(false);
-    }
-    syncVisual();
-  });
-
-  wrap.append(button, volume, label);
-  document.body.append(wrap, audio);
-
-  audio.addEventListener("play", syncVisual);
-  audio.addEventListener("pause", syncVisual);
-  document.addEventListener("rusland:language-changed", syncVisual);
-
-  const storedVolume = parseFloat(localStorage.getItem(STORAGE_MUSIC_VOLUME_KEY) || "0.5");
-  const initialVolume = Number.isFinite(storedVolume) ? storedVolume : 0.5;
-  audio.volume = Math.min(1, Math.max(0, initialVolume));
-  volume.value = String(audio.volume);
-
-  volume.addEventListener("input", () => {
-    const next = parseFloat(volume.value);
-    if (!Number.isFinite(next)) {
-      return;
-    }
-    audio.volume = Math.min(1, Math.max(0, next));
-    persistVolume(audio.volume);
-  });
-
-  const shouldPlay = localStorage.getItem(STORAGE_MUSIC_KEY) === "1";
-  if (shouldPlay) {
-    const tryStart = async () => {
-      try {
-        await audio.play();
-      } catch (_) {
-        // Autoplay may be blocked until user gesture.
-      }
-      syncVisual();
-    };
-    window.addEventListener("pointerdown", tryStart, { once: true });
-  }
-
-  syncVisual();
-}
 
 function setupFeedbackButton() {
   if (!document.body) {
@@ -537,7 +437,7 @@ function setupFeedbackButton() {
   };
 
   document.body.append(link);
-  document.addEventListener("rusland:language-changed", syncText);
+  document.addEventListener("Kyora:language-changed", syncText);
   syncText();
 }
 
@@ -589,7 +489,7 @@ function setupGalleryLightbox() {
       closeLightbox();
     }
   });
-  document.addEventListener("rusland:language-changed", syncLightboxText);
+  document.addEventListener("Kyora:language-changed", syncLightboxText);
 
   figures.forEach((figure) => {
     figure.addEventListener("click", () => {
@@ -661,7 +561,7 @@ function setupApplicationForm() {
   const buildMessage = () => {
     const draft = getDraft();
     const lines = [
-      t("apply.messageTitle", "ЗАЯВКА В RUSLAND"),
+      t("apply.messageTitle", "ЗАЯВКА В Kyora"),
       "",
       `${t("apply.fieldNick", "Ник")}: ${draft.nick || "-"}`,
       `${t("apply.fieldAge", "Возраст")}: ${draft.age || "-"}`,
@@ -759,7 +659,7 @@ function setupApplicationForm() {
     }
 
     const messageLines = [
-      t("apply.messageTitle", "ЗАЯВКА В RUSLAND"),
+      t("apply.messageTitle", "ЗАЯВКА В Kyora"),
       "",
       `${t("apply.fieldNick", "Ник")}: ${nickname}`,
       `${t("apply.fieldAge", "Возраст")}: ${age}`,
@@ -810,7 +710,7 @@ function setupApplicationForm() {
     });
   });
 
-  document.addEventListener("rusland:language-changed", updatePreview);
+  document.addEventListener("Kyora:language-changed", updatePreview);
 
   restoreDraft();
   updatePreview();
@@ -1242,7 +1142,6 @@ async function loadDataForPage() {
 async function init() {
   document.documentElement.classList.add("js-enabled");
   setupCopyIp();
-  setupMusicPlayer();
   setupFeedbackButton();
   setupGalleryLightbox();
   setCoreFields();
@@ -1261,3 +1160,5 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+
